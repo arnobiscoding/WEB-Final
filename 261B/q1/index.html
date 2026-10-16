@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Patient Vitals Monitor</title>
+</head>
+<body>
+  <h2>Patient Vitals Report</h2>
+  Heart Rate: <input type="number" id="hr"><br><br>
+  SpO2: <input type="number" id="spo2"><br><br>
+  <button onclick="saveReading()">Save Reading</button>
+
+  <p id="avgHr">Average Heart Rate: 0</p>
+  <p id="avgSpo2">Average SpO2: 0</p>
+  <p id="risk">Risk Score: 0</p>
+  <p id="feedback"></p>
+
+  <script src="script.js"></script>
+</body>
+</html>
