@@ -64,12 +64,12 @@ Run using PHP's built-in development server from the project root:
 php -S localhost:8000
 ```
 Then navigate to:
-- `http://localhost:8000/251/q2/index.html`
-- `http://localhost:8000/252/q2/index.html`
+- `http://localhost:8000/251/q2/index.php`
+- `http://localhost:8000/252/q2/index.php`
 - `http://localhost:8000/253/q1/index.php`
-- `http://localhost:8000/253/q2/index.html`
-- `http://localhost:8000/261A/q2/index.html`
-- `http://localhost:8000/261B/q2/index.html`
+- `http://localhost:8000/253/q2/index.php`
+- `http://localhost:8000/261A/q2/index.php`
+- `http://localhost:8000/261B/q2/index.php`
 
 Or run directly via XAMPP Apache by placing the folder in `C:\xampp\htdocs\WEB Final\`.
 

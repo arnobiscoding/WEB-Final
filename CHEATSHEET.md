@@ -78,35 +78,35 @@ function calculate() {
   - Delta: `abs($total - $target)`
   - Status: `$total == $target ? "Target met exactly" : ($total > $target ? "Above target" : "Below target")`
 
-### B. Plug-and-Play PHP Template
-```html
-<!-- index.html -->
-<form action="calculate.php" method="POST">
-  Demand: <input type="number" name="demand" required><br><br>
-  Capacity: <input type="number" name="capacity" required><br><br>
-  Cost: <input type="number" name="cost" required><br><br>
-  <button type="submit">Calculate</button>
-</form>
-```
+### B. Plug-and-Play Single-File PHP Template (`index.php`)
 ```php
-<!-- calculate.php -->
-<?php
-$demand = $_POST['demand'];
-$capacity = $_POST['capacity'];
-$cost = $_POST['cost'];
-
-$units = ceil($demand / $capacity);
-$empty = ($units * $capacity) - $demand;
-$wasted = $empty * $cost;
-?>
 <!DOCTYPE html>
 <html>
 <body>
-  <h2>Results</h2>
-  <p>Units Needed: <?php echo $units; ?></p>
-  <p>Empty / Unused: <?php echo $empty; ?></p>
-  <p>Wasted Money: <?php echo $wasted; ?> BDT</p>
-  <a href="index.html">Back</a>
+  <h2>Calculator</h2>
+  <form method="POST">
+    Demand: <input type="number" name="demand" required><br><br>
+    Capacity: <input type="number" name="capacity" required><br><br>
+    Cost: <input type="number" name="cost" required><br><br>
+    <button type="submit">Calculate</button>
+  </form>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $demand = $_POST['demand'];
+    $capacity = $_POST['capacity'];
+    $cost = $_POST['cost'];
+
+    $units = ceil($demand / $capacity);
+    $empty = ($units * $capacity) - $demand;
+    $wasted = $empty * $cost;
+
+    echo "<h3>Results</h3>";
+    echo "<p>Units Needed: $units</p>";
+    echo "<p>Empty / Unused: $empty</p>";
+    echo "<p>Wasted Money: $wasted BDT</p>";
+}
+?>
 </body>
 </html>
 ```

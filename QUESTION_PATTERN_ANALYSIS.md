@@ -168,39 +168,38 @@ Tracks ongoing output against a fixed threshold over multiple days or completed 
 - **Formula 3 (Categorization Ladder):**
   $$\text{Classify: Excellent (120+), Good (90-119), Average (60-89), Poor (<60)}$$
 
-### 4.3 Reusable Master Boilerplate for Question 2 (Barebones & Minimal)
-
-```html
-<!-- index.html -->
-<form action="calculate.php" method="POST">
-  Demand: <input type="number" name="demand" required><br><br>
-  Capacity: <input type="number" name="capacity" required><br><br>
-  Cost: <input type="number" name="cost" required><br><br>
-  <button type="submit">Calculate</button>
-</form>
-```
+### 4.3 Reusable Master Boilerplate for Question 2 (Single-File `index.php`)
 
 ```php
-<!-- calculate.php -->
-<?php
-$demand   = $_POST['demand'];
-$capacity = $_POST['capacity'];
-$cost     = $_POST['cost'];
-
-// Discrete unit allocation (MUST use ceil)
-$units   = ceil($demand / $capacity);
-$unused  = ($units * $capacity) - $demand;
-$wasted  = $unused * $cost;
-?>
 <!DOCTYPE html>
 <html>
-<head><title>Result</title></head>
+<head><title>Calculator</title></head>
 <body>
-  <h2>Calculation Result</h2>
-  <p>Units Needed: <?php echo $units; ?></p>
-  <p>Unused Capacity: <?php echo $unused; ?></p>
-  <p>Wasted Money: <?php echo $wasted; ?> BDT</p>
-  <a href="index.html">Back to Form</a>
+  <h2>Resource & Budget Calculator</h2>
+  <form method="POST">
+    Demand: <input type="number" name="demand" required><br><br>
+    Capacity: <input type="number" name="capacity" required><br><br>
+    Cost: <input type="number" name="cost" required><br><br>
+    <button type="submit">Calculate</button>
+  </form>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $demand   = $_POST['demand'];
+    $capacity = $_POST['capacity'];
+    $cost     = $_POST['cost'];
+
+    // Discrete unit allocation (MUST use ceil)
+    $units   = ceil($demand / $capacity);
+    $unused  = ($units * $capacity) - $demand;
+    $wasted  = $unused * $cost;
+
+    echo "<h3>Calculation Result</h3>";
+    echo "<p>Units Needed: $units</p>";
+    echo "<p>Unused Capacity: $unused</p>";
+    echo "<p>Wasted Money: $wasted BDT</p>";
+}
+?>
 </body>
 </html>
 ```
